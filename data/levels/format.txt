@@ -1,0 +1,14 @@
+# Lelve file format :
+
+background file name
+Tile theme name
+Time available
+Level width
+Level height
+Array of tiles ID
+List of atoms as this format
+ID positionX positionY
+Scheme name
+Scheme width
+Scheme height
+Array of scheme ID
