@@ -34,25 +34,6 @@ add_executable(
     ${sources}
 )
 
-# Finding libraries
-find_package (SDL)
-if (SDL_FOUND)
-  include_directories(${SDL_INCLUDE_DIR})
-  target_link_libraries (Atomix ${SDL_LIBRARY})
-  # MESSAGE("  SDL_INCLUDE_DIR='${SDL_INCLUDE_DIR}'")
-else()
-  message(FATAL_ERROR "SDL not found, please install it (devel packages)")
-endif (SDL_FOUND)
-
-find_package (SDL_image)
-if (SDLIMAGE_FOUND)
-  include_directories(${SDLIMAGE_INCLUDE_DIR})
-  target_link_libraries (Atomix ${SDLIMAGE_LIBRARY})
-  # MESSAGE("  SDLIMAGE_INCLUDE_DIR='${SDLIMAGE_INCLUDE_DIR}'")
-else()
-  message(FATAL_ERROR "SDL Image not found, please install it (devel packages)")
-endif (SDLIMAGE_FOUND)
-
 include_directories(./src)
 include_directories(./deps/NEngine/include)
 
