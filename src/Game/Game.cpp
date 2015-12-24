@@ -255,12 +255,11 @@ bool Game::update()
     m_pEngine->getInputManager()->update();
 
     unsigned int currentTime = m_pEngine->getTime()->getTime();
-    NE::InputManager::ArrowsDirection directions =m_pEngine->getInputManager()->getDirectionsPressed();
-    NE::InputManager::Buttons buttons = m_pEngine->getInputManager()->getButtonsPressed();
+    NE::InputManager::ArrowsDirection directions =m_pEngine->getInputManager()->getDirectionsPressed(0);
     
     if ( m_state == Game::GS_TITLE )
     {
-        if ( buttons == NE::InputManager::INPUT_A )
+        if ( m_pEngine->getInputManager()->getButtonState(0,NE::InputManager::INPUT_A) )
         {
             m_state = Game::GS_GAME;
             resetGame();
@@ -405,7 +404,8 @@ bool Game::update()
             }
             
             // Handle button
-            if ( buttons == NE::InputManager::INPUT_A && currentTime - m_lastButtonTime > 500 )
+            if ( m_pEngine->getInputManager()->getButtonState(0,NE::InputManager::INPUT_A) &&
+                 currentTime - m_lastButtonTime > 500 )
             {
                 if ( m_pLevel->checkAtom(pCursor->getPosition()) )
                 {

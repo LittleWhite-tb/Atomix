@@ -2,15 +2,17 @@ cmake_minimum_required(VERSION 2.8)
 
 cmake_policy(SET CMP0015 NEW)
 
+add_subdirectory("./deps/NEngine")
+
 project(Atomix)
 
 SET(CMAKE_CXX_WARNING_LEVEL 4)
 if (DEFINED MSYS)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+    add_definitions("/W4")
 endif ()
 
 if (DEFINED CMAKE_COMPILER_IS_GNUCC OR DEFINED CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -g")
+    add_definitions("-Wall -Wextra -g")
 endif ()
 
 link_directories(./lib)
@@ -48,17 +50,6 @@ else()
 endif (SDLIMAGE_FOUND)
 
 include_directories(./src)
-include_directories(./include)
-
-include(ExternalProject)
-ExternalProject_Add(
-    NEngine_lib
-    SVN_REPOSITORY https://openawars.googlecode.com/svn/branches/NEngine
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_SOURCE_DIR}/
-    INSTALL_DIR ./
-)
+include_directories(./deps/NEngine/include)
 
 target_link_libraries (Atomix NEngine)
-
-# Force to compile NEngine before the game
-add_dependencies(Atomix NEngine_lib)
